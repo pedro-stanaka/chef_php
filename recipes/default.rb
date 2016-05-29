@@ -34,7 +34,7 @@ lxmx_oh_my_zsh_user node['php_chef']['user'] do
   case_sensitive true
 end
 
-lxmx_oh_my_zsh_user vagrant do
+lxmx_oh_my_zsh_user 'vagrant' do
   plugins        %w{git ruby rvm}
   home 			 "/home/#{node['php_chef']['user']}"
   autocorrect    false
