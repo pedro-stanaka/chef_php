@@ -1,10 +1,17 @@
-# rpdevel-cookbook
+# php_chef-cookbook
 
-TODO: Enter the cookbook description here.
+
+This cookbook installs/configures the following packages:
+
+* PHP7
+* NGINX
+* MySQL (MariaDB)
+* PostgreSQL (9.4)
+* NodeJS + NPM
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+This cookbook should work in all debian-based distros.
 
 ## Attributes
 
@@ -16,7 +23,7 @@ TODO: List your supported platforms.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['rpdevel']['bacon']</tt></td>
+    <td><tt>['php_chef']['bacon']</tt></td>
     <td>Boolean</td>
     <td>whether to include bacon</td>
     <td><tt>true</tt></td>
@@ -25,14 +32,14 @@ TODO: List your supported platforms.
 
 ## Usage
 
-### rpdevel::default
+### php_chef::default
 
-Include `rpdevel` in your node's `run_list`:
+Include `php_chef` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[rpdevel::default]"
+    "recipe[php_chef::default]"
   ]
 }
 ```
