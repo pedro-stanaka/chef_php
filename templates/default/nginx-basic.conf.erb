@@ -1,0 +1,17 @@
+# Basic HTML Static page
+server {
+    listen   80;
+    server_name <%= node['php_chef']['servername'] %>;
+
+    # root directive should be global
+    root   /var/www/<%= node['php_chef']['appname'] %>;
+    index  index.html;
+
+    access_log /var/www/logs/<%= node['php_chef']['appname'] %>/acess.log;
+    error_log /var/www/logs/<%= node['php_chef']['appname'] %>/error.log;
+
+    location / {
+        index index.html;
+    }
+
+}
