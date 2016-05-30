@@ -1,6 +1,5 @@
 
 # Including recipes
-include_recipe 'nginx'
 include_recipe 'vim'
 include_recipe 'zsh'
 include_recipe 'lxmx_oh_my_zsh'
@@ -42,8 +41,7 @@ end
 
 # Networking
 
-hostsfile_entry '127.0.0.1' do 
+hostsfile_entry '127.0.0.1' do
   hostname node['php_chef']['servername']
   action :append
 end
-
