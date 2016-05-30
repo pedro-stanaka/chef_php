@@ -4,8 +4,9 @@ maintainer_email 'me@pedrotanaka.com.br'
 license          'Apache 2.0'
 description      'Installs/Configures LEMP Stack'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+source_url       'https://github.com/pedro-stanaka/php_chef'
+issues_url       'https://github.com/pedro-stanaka/php_chef/issues'
 version          '0.1.0'
-
 
 depends 'nginx', '~> 2.7.6'
 depends 'vim', '~> 2.0.1'

@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = '2'
+VAGRANTFILE_API_VERSION = '2'.freeze
 
 Vagrant.require_version '>= 1.5.0'
 
@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   $ vagrant plugin install vagrant-omnibus
   #
-  if Vagrant.has_plugin?("vagrant-omnibus")
+  if Vagrant.has_plugin?('vagrant-omnibus')
     config.omnibus.chef_version = 'latest'
   end
 
@@ -63,15 +63,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # The path to the Berksfile to use with Vagrant Berkshelf
   # config.berkshelf.berksfile_path = "./Berksfile"
 
-  # Enabling the Berkshelf plugin. To enable this globally, add this configuration
+  # Enabling the Berkshelf plugin. To enable this globally,
+  # add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
   config.berkshelf.enabled = true
 
-  # An array of symbols representing groups of cookbook described in the Vagrantfile
+  # An array of symbols representing groups of cookbook
+  # described in the Vagrantfile
   # to exclusively install and copy to Vagrant's shelf.
   # config.berkshelf.only = []
 
-  # An array of symbols representing groups of cookbook described in the Vagrantfile
+  # An array of symbols representing groups of cookbook
+  # described in the Vagrantfile
   # to skip installing and copying to Vagrant's shelf.
   # config.berkshelf.except = []
 
