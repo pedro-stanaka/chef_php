@@ -43,7 +43,7 @@ end
 # Networking
 
 hostsfile_entry '127.0.0.1' do 
-  hostname "#{node['php_chef']['servername']}"
+  hostname node['php_chef']['servername']
   action :append
 end
 

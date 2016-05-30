@@ -38,7 +38,7 @@ nginx_site "default" do
   enable false
 end
 
-nginx_site "#{node['php_chef']['appname']}" do 
+nginx_site node['php_chef']['appname'] do 
   enable true
   notifies :restart, 'service[nginx]'
 end
