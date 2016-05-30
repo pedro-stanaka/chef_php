@@ -81,8 +81,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       mariadb: {
-        server_root_password: 'rootpass',
-        server_debian_password: 'debpass',
+        server_root_password: 'p4assch3fphp',
+        server_debian_password: 'p4assch3fphp',
         server_repl_password: 'replpass'
       }
     }
