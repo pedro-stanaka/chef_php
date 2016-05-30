@@ -3,7 +3,7 @@
 server {
     listen   80;
     server_name <%= node['php_chef']['servername'] %>;
-    # rewrite ^(.*) http://<%= node['php_chef']['servername'] %>$1 permanent;
+    rewrite ^(.*) http://<%= node['php_chef']['servername'] %>$1 permanent;
 }
 
 server {
@@ -11,7 +11,7 @@ server {
     server_name <%= node['php_chef']['servername'] %>;
 
     # root directive should be global
-    root   /var/www/<%= node['php_chef']['appname'] %>;
+    root   <%= node['php_chef']['document_root'] %>;
     index  index.php index.html;
 
     access_log /var/www/logs/<%= node['php_chef']['appname'] %>/acess.log;
