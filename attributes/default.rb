@@ -15,3 +15,6 @@ default['php_chef']['database']['host'] = 'localhost'
 default['php_chef']['database']['username'] = 'root'
 default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
 default['php_chef']['database']['dbname'] = 'phpchef'
+
+default['php_chef']['database']['app']['username'] = 'phpapp'
+default['php_chef']['database']['app']['password'] = 'appsecret'
