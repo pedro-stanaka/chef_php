@@ -56,10 +56,8 @@ nginx_site node['php_chef']['appname'] do
   notifies :restart, 'service[nginx]'
 end
 
-php_pear 'memcache' do
-  action :install
-end
-
-php_pear 'redis' do
-  action :install
+%w(redis intl mbstring).each do |pkg|
+  php_pear pkg do
+    action :install
+  end
 end

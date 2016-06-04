@@ -2,6 +2,8 @@
 include_recipe 'mariadb::server'
 include_recipe 'mariadb::client'
 include_recipe 'mysql2_chef_gem::mariadb'
+include_recipe 'postgresql::server'
+include_recipe 'postgresql::client'
 
 mysql_database node['php_chef']['database']['dbname'] do
   connection(
