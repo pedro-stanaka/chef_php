@@ -60,4 +60,6 @@ php_pear 'memcache' do
   action :install
 end
 
-php_pear
+php_pear 'redis' do
+  action :install
+end
