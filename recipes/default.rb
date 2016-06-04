@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: rpdevel
+# Cookbook Name:: php_chef
 # Recipe:: default
 #
 # Copyright (C) 2016 YOUR_NAME

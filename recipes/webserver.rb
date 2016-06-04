@@ -2,6 +2,7 @@
 
 include_recipe 'php'
 include_recipe 'nginx'
+include_recipe 'php_chef::php_extensions'
 
 user 'www-data' do
   comment 'Default web server user'
@@ -56,8 +57,9 @@ nginx_site node['php_chef']['appname'] do
   notifies :restart, 'service[nginx]'
 end
 
-%w(redis intl mbstring).each do |pkg|
+%w(redis intl).each do |pkg|
   php_pear pkg do
     action :install
   end
+  # TODO: create resource to activate extensions
 end

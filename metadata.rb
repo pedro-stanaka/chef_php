@@ -8,7 +8,6 @@ source_url       'https://github.com/pedro-stanaka/php_chef'
 issues_url       'https://github.com/pedro-stanaka/php_chef/issues'
 version          '0.1.0'
 
-
 # WebServer
 depends 'user', '~> 0.4.2'
 depends 'php', '~> 1.9.0'
