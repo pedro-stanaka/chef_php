@@ -1,10 +1,4 @@
-# 
-
-server {
-    listen   80;
-    server_name <%= node['php_chef']['servername'] %>;
-    rewrite ^(.*) http://<%= node['php_chef']['servername'] %>$1 permanent;
-}
+# Provisioned with Chef-solo
 
 server {
     listen   80;
@@ -24,7 +18,7 @@ server {
     location ~ \.php$ {
         try_files $uri =404;
         include /etc/nginx/fastcgi_params;
-        fastcgi_pass    127.0.0.1:9000;
+        fastcgi_pass    unix:<%= node['php_chef']['webserver']['php_fpm_url'] %>;
         fastcgi_index   index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }

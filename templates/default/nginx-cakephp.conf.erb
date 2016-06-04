@@ -1,0 +1,31 @@
+# Provisioned with Chef-solo
+
+server {
+    listen   80;
+    server_name <%= node['php_chef']['servername'] %>;
+    rewrite ^(.*) http://<%= node['php_chef']['servername'] %>$1 permanent;
+}
+
+server {
+    listen   80;
+    server_name <%= node['php_chef']['servername'] %>;
+
+    # root directive should be global
+    root   <%= node['php_chef']['document_root'] %>;
+    index  index.php index.html;
+
+    access_log /var/www/logs/<%= node['php_chef']['appname'] %>/acess.log;
+    error_log /var/www/logs/<%= node['php_chef']['appname'] %>/error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass    unix:<%= node['php_chef']['webserver']['php_fpm_url'] %>;
+        fastcgi_index   index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}

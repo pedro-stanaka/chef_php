@@ -6,6 +6,7 @@ default['php_chef']['group'] = 'deploy'
 default['php_chef']['appname'] = 'myapp'
 default['php_chef']['servername'] = 'myapp.local'
 default['php_chef']['document_root'] = "/var/www/#{node['php_chef']['appname']}"
+default['php_chef']['webserver']['php_fpm_url'] = '/var/run/php5-fpm.sock'
 
 # Database
 default['mariadb']['install']['version'] = '5.5'

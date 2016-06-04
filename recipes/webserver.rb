@@ -11,13 +11,13 @@ end
 
 php_fpm_pool 'www' do
   action :install
-  listen '/var/run/php5-fpm.sock'
+  listen node['php_chef']['webserver']['php_fpm_url']
   user 'www-data'
   group 'www-data'
 end
 
 template "#{node['nginx']['dir']}/sites-available/#{node['php_chef']['appname']}" do
-  source 'nginx-basic.conf.erb'
+  source 'nginx-php.conf.erb'
   notifies :restart, 'service[nginx]'
 end
 
@@ -43,8 +43,8 @@ directory "/var/www/logs/#{node['php_chef']['appname']}" do
   recursive true
 end
 
-cookbook_file "#{node['php_chef']['document_root']}/index.html" do
-  mode '0644'
+cookbook_file "#{node['php_chef']['document_root']}/index.php" do
+  mode '0775'
 end
 
 nginx_site 'default' do
@@ -55,3 +55,9 @@ nginx_site node['php_chef']['appname'] do
   enable true
   notifies :restart, 'service[nginx]'
 end
+
+php_pear 'memcache' do
+  action :install
+end
+
+php_pear
