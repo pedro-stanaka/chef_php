@@ -24,6 +24,8 @@ end
 
 directory "/var/www/#{node['php_chef']['appname']}" do
   mode '0755'
+  user node['php_chef']['user']
+  group 'www-data'
   action :create
   recursive true
 end

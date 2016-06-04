@@ -2,6 +2,7 @@
 
 include_recipe 'rvm::user'
 include_recipe 'nodejs'
+include_recipe 'composer'
 
 nodejs_npm 'grunt'
 nodejs_npm 'gulp'

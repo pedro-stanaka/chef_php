@@ -4,8 +4,8 @@ package 'Install ICU Libs (development)' do
   action :install
   case node['platform']
   when 'redhat', 'centos', 'amazon', 'scientific', 'oracle'
-    package_name %w(libicu-devel)
+    package_name %w(libicu-devel php-mysql php-pgsql)
   when 'ubuntu', 'debian'
-    package_name 'libicu-dev'
+    package_name %w(libicu-dev php5-mysql php5-pgsql)
   end
 end
