@@ -18,3 +18,17 @@ default['php_chef']['database']['dbname'] = 'phpchef'
 
 default['php_chef']['database']['app']['username'] = 'phpapp'
 default['php_chef']['database']['app']['password'] = 'appsecret'
+
+default['rvm']['user_installs'] = [
+  {
+    'user'          => 'vagrant',
+    'default_ruby'  => '2.3.1',
+    'rubies'        => ['2.3.1'],
+    'global_gems' => [
+      { 'name'    => 'bundler' },
+      { 'name'    => 'rake' },
+      { 'name'    => 'sass' },
+      { 'name'    => 'capistrano' }
+    ]
+  }
+]

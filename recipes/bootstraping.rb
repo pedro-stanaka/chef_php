@@ -2,17 +2,34 @@
 # Including recipes
 include_recipe 'vim'
 include_recipe 'zsh'
-include_recipe 'lxmx_oh_my_zsh'
 include_recipe 'tmux'
+include_recipe 'htop'
+include_recipe 'git'
+include_recipe 'curl'
+include_recipe 'zlib'
+include_recipe 'user::data_bag'
+include_recipe 'lxmx_oh_my_zsh'
 
 # Users and Groups Stuff...
 group node['php_chef']['group']
 
+user_account 'vagrant' do
+  shell '/usr/bin/zsh'
+end
+
 user node['php_chef']['user'] do
+  action :create
   system true
   group node['php_chef']['group']
-  group 'www-data'
   shell '/usr/bin/zsh'
+end
+
+directory "/home/#{node['php_chef']['user']}/.rvm" do
+  action :create
+  owner node['php_chef']['user']
+  group node['php_chef']['group']
+  mode '0777'
+  recursive true
 end
 
 group 'www-data' do
