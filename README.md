@@ -9,6 +9,11 @@ This cookbook installs/configures the following packages:
 * MySQL (MariaDB)
 * PostgreSQL (9.4)
 * NodeJS + NPM
+  * Grunt
+  * Gulp
+  * CoffeeScript
+  * Bower 
+  * Yo
 
 ## Supported Platforms
 
