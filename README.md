@@ -1,4 +1,5 @@
-# php_chef-cookbook
+# php_chef Cookbook
+[![Build Status](https://travis-ci.org/pedro-stanaka/php_chef.svg?branch=master)](https://travis-ci.org/pedro-stanaka/php_chef)
 
 
 This cookbook installs/configures the following packages:
