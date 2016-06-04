@@ -9,6 +9,7 @@ issues_url       'https://github.com/pedro-stanaka/php_chef/issues'
 version          '0.1.0'
 
 depends 'user', '~> 0.4.2'
+depends 'php', '~> 1.9.0'
 depends 'nginx', '~> 2.7.6'
 depends 'vim', '~> 2.0.1'
 depends 'htop', '~> 2.0.0'

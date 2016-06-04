@@ -2,6 +2,7 @@
 default['php_chef']['user'] = 'deploy'
 default['php_chef']['group'] = 'deploy'
 
+# Web Server
 default['php_chef']['appname'] = 'myapp'
 default['php_chef']['servername'] = 'myapp.local'
 default['php_chef']['document_root'] = "/var/www/#{node['php_chef']['appname']}"
@@ -19,6 +20,7 @@ default['php_chef']['database']['dbname'] = 'phpchef'
 default['php_chef']['database']['app']['username'] = 'phpapp'
 default['php_chef']['database']['app']['password'] = 'appsecret'
 
+# Utilities
 default['rvm']['user_installs'] = [
   {
     'user'          => 'vagrant',

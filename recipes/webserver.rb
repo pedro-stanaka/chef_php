@@ -1,6 +1,20 @@
 # Nginx Configuration
 
+include_recipe 'php'
 include_recipe 'nginx'
+
+user 'www-data' do
+  comment 'Default web server user'
+  gid 'www-data'
+  shell '/usr/bin/zsh'
+end
+
+php_fpm_pool 'www' do
+  action :install
+  listen '/var/run/php5-fpm.sock'
+  user 'www-data'
+  group 'www-data'
+end
 
 template "#{node['nginx']['dir']}/sites-available/#{node['php_chef']['appname']}" do
   source 'nginx-basic.conf.erb'
