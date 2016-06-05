@@ -26,9 +26,15 @@ end
 default['php_chef']['webserver']['php_extensions'] = php_packages
 
 # Database
-default['mariadb']['install']['version'] = '5.5'
+case node['platform']
+when 'ubuntu'
+  default['mariadb']['install']['version'] = '5.5'
+when 'debian'
+  default['mariadb']['install']['version'] = '10.0'
+end
 default['mariadb']['install']['prefer_os_package'] = false
 default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'
+
 default['php_chef']['database']['host'] = 'localhost'
 default['php_chef']['database']['username'] = 'root'
 default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
