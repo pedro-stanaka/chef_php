@@ -15,7 +15,7 @@ suites:
   - name: default
     run_list: ["recipe[php_chef]"]
     attributes:
-      mysql:
+      mariadb:
         server_root_password: 'p4assch3fphp'
         server_debian_password: 'p4assch3fphp'
         server_repl_password: 'replpass'
