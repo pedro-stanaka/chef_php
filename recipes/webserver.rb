@@ -10,7 +10,7 @@ user 'www-data' do
   shell '/usr/bin/zsh'
 end
 
-php_fpm_pool 'www' do
+php_fpm_pool 'default' do
   action :install
   listen node['php_chef']['webserver']['php_fpm_url']
   user 'www-data'
