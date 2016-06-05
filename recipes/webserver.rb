@@ -59,9 +59,14 @@ nginx_site node['php_chef']['appname'] do
   notifies :restart, 'service[nginx]'
 end
 
-%w(redis intl).each do |pkg|
-  php_pear pkg do
+if !platform_family?('rhel', 'fedora')
+  %w(redis intl).each do |pkg|
+    php_pear pkg do
+      action :install
+    end
+  end
+else # On rhel and fedora install intl via package
+  php_pear 'redis' do
     action :install
   end
-  # TODO: create resource to activate extensions
 end

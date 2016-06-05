@@ -12,7 +12,7 @@ php_packages = []
 
 case node['platform_family']
 when 'rhel', 'fedora' # (redhat, centos, scientific, etc)
-  php_packages = %w(libicu-devel php-mysql php-pgsql)
+  php_packages = %w(php-mysql php-pgsql php-intl)
 when 'debian'
   php_packages = %w(libicu-dev php5-mysql php5-pgsql)
   if platform?('ubuntu')
@@ -36,8 +36,16 @@ when 'debian'
     %w(libmariadb-client-lgpl-dev libmariadbd-dev)
   default['mariadb']['forbid_remote_root'] = false
 end
-default['mariadb']['install']['prefer_os_package'] = false
-default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'
+
+case node['platform_family']
+when 'rhel' 'fedora'
+  default['mariadb']['install']['use_default_repository'] = true
+  default['mariadb']['install']['prefer_os_package'] = true
+when 'debian'
+  default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'
+  default['mariadb']['install']['prefer_os_package'] = false
+end
+
 
 default['php_chef']['database']['host'] = '127.0.0.1'
 default['php_chef']['database']['username'] = 'root'

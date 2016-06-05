@@ -3,4 +3,5 @@
 package 'Install ICU Libs (development)' do
   action :install
   package_name node['php_chef']['webserver']['php_extensions']
+  notifies :restart, 'service[nginx]'
 end
