@@ -34,13 +34,14 @@ when 'debian'
   default['mariadb']['client']['development_files'] = false
   default['php_chef']['database']['packages'] = \
     %w(libmariadb-client-lgpl-dev libmariadbd-dev)
+  default['mariadb']['forbid_remote_root'] = false
 end
 default['mariadb']['install']['prefer_os_package'] = false
 default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'
 
-default['php_chef']['database']['host'] = 'localhost'
+default['php_chef']['database']['host'] = '127.0.0.1'
 default['php_chef']['database']['username'] = 'root'
-default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
+default['php_chef']['database']['password'] = node['mysql']['server_root_password']
 default['php_chef']['database']['dbname'] = 'phpchef'
 
 ## PostgreSQL
