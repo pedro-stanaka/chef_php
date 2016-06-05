@@ -8,6 +8,26 @@ default['php_chef']['servername'] = 'myapp.local'
 default['php_chef']['document_root'] = "/var/www/#{node['php_chef']['appname']}"
 default['php_chef']['webserver']['php_fpm_url'] = '/var/run/php5-fpm.sock'
 
+php_packages = []
+
+case node['platform_family']
+when 'rhel', 'fedora' # (redhat, centos, scientific, etc)
+  php_packages += %w(libicu-devel php-mysql php-pgsql)
+when 'debian'
+  php_packages += %w(libicu-dev php5-mysql php5-pgsql)
+  if platform?('ubuntu')
+    case node['platform']['version']
+    when 16.04
+      php_packages += node['php']['src_deps']
+      php_packages += %w(libicu-dev php7.0-mysql php7.0-pgsql)
+    end
+  end
+end
+
+default['php_chef']['webserver']['php_extensions'] = php_packages
+
+
+
 # Database
 default['mariadb']['install']['version'] = '5.5'
 default['mariadb']['install']['prefer_os_package'] = false
