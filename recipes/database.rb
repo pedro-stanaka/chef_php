@@ -1,7 +1,6 @@
 
 include_recipe 'mariadb::server'
 include_recipe 'mariadb::client'
-include_recipe 'mysql2_chef_gem::mariadb'
 include_recipe 'postgresql::server'
 include_recipe 'postgresql::client'
 
@@ -25,6 +24,7 @@ mysql_database_user node['php_chef']['database']['app']['username'] do
   action [:create, :grant]
 end
 
+
 if platform?('debian')
   node['php_chef']['database']['packages'].each do |pkg|
     package 'Debian MariaDB Client Files' do
@@ -33,3 +33,6 @@ if platform?('debian')
     end
   end
 end
+
+# Include after installing client libraries
+include_recipe 'mysql2_chef_gem::mariadb'
