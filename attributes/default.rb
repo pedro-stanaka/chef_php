@@ -41,7 +41,7 @@ default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mar
 
 default['php_chef']['database']['host'] = '127.0.0.1'
 default['php_chef']['database']['username'] = 'root'
-default['php_chef']['database']['password'] = node['mysql']['server_root_password']
+default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
 default['php_chef']['database']['dbname'] = 'phpchef'
 
 ## PostgreSQL
