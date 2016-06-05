@@ -31,7 +31,9 @@ when 'ubuntu'
   default['mariadb']['install']['version'] = '5.5'
 when 'debian'
   default['mariadb']['install']['version'] = '10.0'
-  default['mariadb']['client']['packages'] = %w(libmariadbd-dev libmariadb-client-lgpl-dev)
+  default['mariadb']['client']['development_files'] = false
+  default['php_chef']['database']['packages'] = \
+    %w(libmariadb-client-lgpl-dev libmariadbd-dev)
 end
 default['mariadb']['install']['prefer_os_package'] = false
 default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'

@@ -24,3 +24,12 @@ mysql_database_user node['php_chef']['database']['app']['username'] do
   host node['php_chef']['database']['host']
   action [:create, :grant]
 end
+
+if platform?('debian')
+  node['php_chef']['database']['packages'].each do |pkg|
+    package 'Debian MariaDB Client Files' do
+      action :install
+      package_name pkg
+    end
+  end
+end
