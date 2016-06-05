@@ -8,7 +8,6 @@
 #
 
 # Including inner recipes
-
 include_recipe 'php_chef::bootstraping'
 include_recipe 'php_chef::webserver'
 include_recipe 'php_chef::database'
