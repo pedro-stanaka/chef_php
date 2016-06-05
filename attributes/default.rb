@@ -26,26 +26,25 @@ end
 default['php_chef']['webserver']['php_extensions'] = php_packages
 
 # Database
+default['mariadb']['install']['version'] = '10.0'
 case node['platform']
 when 'ubuntu'
   default['mariadb']['install']['version'] = '5.5'
 when 'debian'
-  default['mariadb']['install']['version'] = '10.0'
   default['mariadb']['client']['development_files'] = false
   default['php_chef']['database']['packages'] = \
     %w(libmariadb-client-lgpl-dev libmariadbd-dev)
-  default['mariadb']['forbid_remote_root'] = false
 end
 
+Chef::Log.warn "The platform version is #{node['platform_version']}"
+
 case node['platform_family']
-when 'rhel' 'fedora'
-  default['mariadb']['install']['use_default_repository'] = true
+when 'rhel', 'fedora'
   default['mariadb']['install']['prefer_os_package'] = true
 when 'debian'
   default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'
   default['mariadb']['install']['prefer_os_package'] = false
 end
-
 
 default['php_chef']['database']['host'] = '127.0.0.1'
 default['php_chef']['database']['username'] = 'root'
