@@ -33,7 +33,7 @@ directory "/home/#{node['php_chef']['user']}/.rvm" do
 end
 
 group 'www-data' do
-  action :modify
+  action :create
   members ['vagrant', node['php_chef']['user']]
   append true
 end
