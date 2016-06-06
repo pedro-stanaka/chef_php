@@ -6,8 +6,8 @@ include_recipe 'postgresql::client'
 
 if platform?('ubuntu')
   directory "/etc/postgresql/#{node['postgresql']['version']}/main" do
-    owner 'postgres'
-    group 'postgres'
+    owner 'nobody'
+    group 'nogroup'
     mode 00755
     recursive true
     action :create
