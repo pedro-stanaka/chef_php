@@ -1,5 +1,6 @@
 
 # Including recipes
+include_recipe 'apt::default'
 include_recipe 'vim'
 include_recipe 'zsh'
 include_recipe 'tmux'
@@ -11,11 +12,10 @@ include_recipe 'locale'
 include_recipe 'user::data_bag'
 include_recipe 'lxmx_oh_my_zsh'
 
-execute 'apt-get-update' do
-  command 'apt-get update --fix-missing'
-  ignore_failure true
-  action :nothing
-  only_if platform?('ubuntu')
+package 'Rubies source deps' do
+  action :install
+  package_name %w(libffi-dev bison automake libxml2-dev)
+  only_if { platform?('ubuntu') }
 end
 
 # Users and Groups Stuff...
