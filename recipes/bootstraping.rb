@@ -10,6 +10,13 @@ include_recipe 'zlib'
 include_recipe 'user::data_bag'
 include_recipe 'lxmx_oh_my_zsh'
 
+execute 'apt-get-update' do
+  command 'apt-get update --fix-missing'
+  ignore_failure true
+  action :nothing
+  only_if platform_family?('debian')
+end
+
 # Users and Groups Stuff...
 group node['php_chef']['group']
 
