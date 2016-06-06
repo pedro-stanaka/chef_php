@@ -4,14 +4,13 @@ include_recipe 'mariadb::client'
 
 include_recipe 'postgresql::client'
 
-if platform?('ubuntu')
-  directory "/etc/postgresql/#{node['postgresql']['version']}/main" do
-    owner 'nobody'
-    group 'nogroup'
-    mode 00755
-    recursive true
-    action :create
-  end
+directory "/etc/postgresql/#{node['postgresql']['version']}/main" do
+  owner 'nobody'
+  group 'nogroup'
+  mode 00755
+  recursive true
+  action :create
+  only_if { platform?('ubuntu') }
 end
 
 include_recipe 'postgresql::server'
