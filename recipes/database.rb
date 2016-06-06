@@ -1,9 +1,21 @@
 
 include_recipe 'mariadb::server'
 include_recipe 'mariadb::client'
+
+include_recipe 'postgresql::client'
+
+if platform?('ubuntu')
+  directory "/etc/postgresql/#{node['postgresql']['version']}/main" do
+    owner 'postgres'
+    group 'postgres'
+    mode 00755
+    recursive true
+    action :create
+  end
+end
+
 include_recipe 'postgresql::server'
 include_recipe 'postgresql::config_initdb'
-include_recipe 'postgresql::client'
 
 if platform?('debian')
   node['php_chef']['database']['packages'].each do |pkg|

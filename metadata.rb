@@ -20,6 +20,7 @@ depends 'postgresql', '~> 4.0.6'
 depends 'mariadb', '~> 0.3.1'
 
 # Utilities
+depends 'locale', '~> 1.1.0'
 depends 'vim', '~> 2.0.1'
 depends 'htop', '~> 2.0.0'
 depends 'git', '~> 4.5.0'
