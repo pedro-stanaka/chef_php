@@ -1,2 +1,5 @@
 LineLength:
- Max: 100
+  Max: 100
+AllCops:
+  Exclude:
+    - Vagrantfile
