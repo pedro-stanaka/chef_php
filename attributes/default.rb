@@ -36,8 +36,6 @@ when 'debian'
     %w(libmariadb-client-lgpl-dev libmariadbd-dev)
 end
 
-Chef::Log.warn "The platform version is #{node['platform_version']}"
-
 case node['platform_family']
 when 'rhel', 'fedora'
   default['mariadb']['install']['prefer_os_package'] = true

@@ -63,6 +63,7 @@ if !platform_family?('rhel', 'fedora')
   %w(redis intl).each do |pkg|
     php_pear pkg do
       action :install
+      notifies :restart, 'service[nginx]'
     end
   end
 else # On rhel and fedora install intl via package

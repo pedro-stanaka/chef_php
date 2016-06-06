@@ -2,6 +2,7 @@
 include_recipe 'mariadb::server'
 include_recipe 'mariadb::client'
 include_recipe 'postgresql::server'
+include_recipe 'postgresql::config_initdb'
 include_recipe 'postgresql::client'
 
 if platform?('debian')

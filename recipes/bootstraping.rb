@@ -14,7 +14,7 @@ execute 'apt-get-update' do
   command 'apt-get update --fix-missing'
   ignore_failure true
   action :nothing
-  only_if platform_family?('debian')
+  only_if platform?('ubuntu')
 end
 
 # Users and Groups Stuff...
