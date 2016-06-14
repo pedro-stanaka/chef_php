@@ -15,12 +15,13 @@ case node['platform_family']
 when 'rhel', 'fedora' # (redhat, centos, scientific, etc)
   php_packages = %w(php-mysql php-pgsql php-intl)
 when 'debian'
-  php_packages = %w(libicu-dev php5-mysql php5-pgsql php5-intl)
+  php_packages = %w(libicu-dev php5-mysql php5-pgsql php5-intl php5-mbstring)
 
   if platform?('ubuntu')
     case node['platform_version'].to_f
     when 16.04
-      php_packages = node['php']['src_deps'] + %w(libicu-dev php7.0-mysql php7.0-pgsql php-intl)
+      php_packages = node['php']['src_deps'] + \
+                     %w(libicu-dev php7.0-mysql php7.0-pgsql php-intl php-mbstring)
       default['php_chef']['webserver']['redis_version'] = '3.0.0'
     end
   end
