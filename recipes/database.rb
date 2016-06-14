@@ -16,7 +16,7 @@ end
 include_recipe 'postgresql::server'
 include_recipe 'postgresql::config_initdb'
 
-if platform?('debian')
+if platform?('debian') || (platform?('ubuntu') && node['platform_version'].to_f > 14.04)
   node['php_chef']['database']['packages'].each do |pkg|
     package 'Debian MariaDB Client Files' do
       action :install

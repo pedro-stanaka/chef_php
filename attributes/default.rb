@@ -38,7 +38,7 @@ when 'ubuntu'
     default['mariadb']['install']['version'] = '10.0'
     default['mariadb']['client']['development_files'] = false
     default['php_chef']['database']['packages'] = \
-      %w(libmariadb-client-lgpl-dev libmariadbd-dev)
+      %w(libmariadb-client-lgpl-dev libmariadbd-dev libmysqlclient-dev)
   end
 when 'debian'
   default['mariadb']['client']['development_files'] = false
@@ -73,7 +73,7 @@ default['postgresql']['password']['postgres'] = 'postgres'
 default['php_chef']['database']['app']['username'] = 'phpapp'
 default['php_chef']['database']['app']['password'] = 'appsecret'
 
-if platform_family?('ubuntu') && node['platform_version'].to_f > 14.04
+if platform?('ubuntu') && node['platform_version'].to_f > 14.04
   # Ubuntu Xenial
   default['postgresql']['version'] = '9.5'
   default['postgresql']['dir'] = '/etc/postgresql/9.5/main'
