@@ -73,13 +73,13 @@ default['postgresql']['password']['postgres'] = 'postgres'
 default['php_chef']['database']['app']['username'] = 'phpapp'
 default['php_chef']['database']['app']['password'] = 'appsecret'
 
-if platform_family?('ubuntu') and node['platform_family']['version'].to_f > 14.04
-   # Ubuntu Xenial
-   default['postgresql']['version'] = "9.5"
-   default['postgresql']['dir'] = "/etc/postgresql/9.5/main"
-   default['postgresql']['client']['packages'] = ["postgresql-client-9.5", "libpq-dev"]
-   default['postgresql']['server']['packages'] = ["postgresql-9.4"]
-   default['postgresql']['contrib']['packages'] = ["postgresql-contrib-9.4"]
+if platform_family?('ubuntu') && node['platform_version'].to_f > 14.04
+  # Ubuntu Xenial
+  default['postgresql']['version'] = '9.5'
+  default['postgresql']['dir'] = '/etc/postgresql/9.5/main'
+  default['postgresql']['client']['packages'] = ['postgresql-client-9.5', 'libpq-dev']
+  default['postgresql']['server']['packages'] = ['postgresql-9.4']
+  default['postgresql']['contrib']['packages'] = ['postgresql-contrib-9.4']
 end
 
 # Utilities
