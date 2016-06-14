@@ -35,7 +35,7 @@ when 'ubuntu'
   default['mariadb']['install']['version'] = '5.5'
   case node['platform_version'].to_f
   when 16.04
-      default['mariadb']['install']['version'] = '10.0'
+    default['mariadb']['install']['version'] = '10.0'
   end
 when 'debian'
   default['mariadb']['client']['development_files'] = false
