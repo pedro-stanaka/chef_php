@@ -96,3 +96,7 @@ default['rvm']['user_installs'] = [
     ]
   }
 ]
+
+if platform?('ubuntu') && node['platform_version'].to_f > 14.04
+  default['nodejs']['packages'] = ['nodejs', 'npm', 'nodejs-dev']
+end
