@@ -15,7 +15,7 @@ case node['platform_family']
 when 'rhel', 'fedora' # (redhat, centos, scientific, etc)
   php_packages = %w(php-mysql php-pgsql php-intl)
 when 'debian'
-  php_packages = %w(libicu-dev php5-mysql php5-pgsql)
+  php_packages = %w(libicu-dev php5-mysql php5-pgsql php5-intl)
 
   if platform?('ubuntu')
     case node['platform_version'].to_f
@@ -33,6 +33,10 @@ default['mariadb']['install']['version'] = '10.0'
 case node['platform']
 when 'ubuntu'
   default['mariadb']['install']['version'] = '5.5'
+  case node['platform_version'].to_f
+  when 16.04
+      default['mariadb']['install']['version'] = '10.0'
+  end
 when 'debian'
   default['mariadb']['client']['development_files'] = false
   default['php_chef']['database']['packages'] = \
