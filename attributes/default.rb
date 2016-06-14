@@ -36,6 +36,9 @@ when 'ubuntu'
   case node['platform_version'].to_f
   when 16.04
     default['mariadb']['install']['version'] = '10.0'
+    default['mariadb']['client']['development_files'] = false
+    default['php_chef']['database']['packages'] = \
+      %w(libmariadb-client-lgpl-dev libmariadbd-dev)
   end
 when 'debian'
   default['mariadb']['client']['development_files'] = false
