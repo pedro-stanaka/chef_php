@@ -10,15 +10,18 @@ default['php_chef']['webserver']['php_fpm_url'] = '/var/run/php5-fpm.sock'
 
 php_packages = []
 
+default['php_chef']['webserver']['redis_version'] = '2.2.8'
 case node['platform_family']
 when 'rhel', 'fedora' # (redhat, centos, scientific, etc)
   php_packages = %w(php-mysql php-pgsql php-intl)
 when 'debian'
   php_packages = %w(libicu-dev php5-mysql php5-pgsql)
+
   if platform?('ubuntu')
     case node['platform_version'].to_f
     when 16.04
-      php_packages = node['php']['src_deps'] + %w(libicu-dev php7.0-mysql php7.0-pgsql)
+      php_packages = node['php']['src_deps'] + %w(libicu-dev php7.0-mysql php7.0-pgsql php-intl)
+      default['php_chef']['webserver']['redis_version'] = '3.0.0'
     end
   end
 end
