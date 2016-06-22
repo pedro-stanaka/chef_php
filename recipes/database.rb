@@ -23,6 +23,16 @@ if platform?('debian') || (platform?('ubuntu') && node['platform_version'].to_f 
       package_name pkg
     end
   end
+
+  template '/tmp/mysql_fix.sql' do
+    source 'fix_maria_socket_auth.sql.erb'
+    mode 00777
+  end
+
+  execute 'fix mysql socket auth' do
+    command "sudo mysql -uroot -p#{node['mariadb']['server_root_password']} < /tmp/mysql_fix.sql"
+    action :run
+  end
 end
 
 # Include after installing client libraries
