@@ -1,6 +1,12 @@
 
 # Including recipes
-include_recipe 'apt::default'
+
+execute 'apt-get update' do
+  command 'apt-get update --fix-missing --quiet'
+  action :run
+  only_if { platform_family?('debian') }
+end
+
 include_recipe 'vim'
 include_recipe 'zsh'
 include_recipe 'tmux'

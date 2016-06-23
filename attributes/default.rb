@@ -19,7 +19,7 @@ case node['platform_family']
 when 'rhel', 'fedora' # (redhat, centos, scientific, etc)
   php_packages = %w(php-mysql php-pgsql php-intl)
 when 'debian'
-  php_packages = %w(libicu-dev php5-mysql php5-pgsql php5-intl php5-mbstring)
+  php_packages = %w(libicu-dev php5-mysql php5-pgsql php5-intl)
 
   if platform?('ubuntu')
     case node['platform_version'].to_f
