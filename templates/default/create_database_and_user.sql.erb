@@ -1,0 +1,8 @@
+
+CREATE USER '<%= node['php_chef']['database']['app']['username'] %>'@'localhost'
+  IDENTIFIED BY '<%= node['php_chef']['database']['app']['password'] %>';
+
+CREATE DATABASE <%= node['php_chef']['database']['dbname'] %>;
+
+GRANT ALL PRIVILEGES ON <%= node['php_chef']['database']['dbname'] %>.*
+  TO '<%= node['php_chef']['database']['app']['username'] %>'@'localhost';

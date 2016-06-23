@@ -12,7 +12,7 @@ This cookbook installs/configures the following packages:
   * Grunt
   * Gulp
   * CoffeeScript
-  * Bower 
+  * Bower
   * Yo
 
 ## Supported Platforms
@@ -36,7 +36,18 @@ This cookbook should work in all debian-based distros.
   </tr>
 </table>
 
+## Vagrant Plugins
+
+In order to use this repository one must install Chef plugins in Vagrant.
+To do this, run the following commands:
+
+```bash
+vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-omnibus
+```
+
 ## Usage
+
 
 ### php_chef::default
 
@@ -49,7 +60,6 @@ Include `php_chef` in your node's `run_list`:
   ]
 }
 ```
-
 
 ### Deploy in server
 

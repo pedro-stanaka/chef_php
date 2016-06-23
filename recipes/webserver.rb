@@ -59,15 +59,7 @@ nginx_site node['php_chef']['appname'] do
   notifies :restart, 'service[nginx]'
 end
 
-if !platform_family?('rhel', 'fedora')
-  %w(redis intl).each do |pkg|
-    php_pear pkg do
-      action :install
-      notifies :restart, 'service[nginx]'
-    end
-  end
-else # On rhel and fedora install intl via package
-  php_pear 'redis' do
-    action :install
-  end
+php_pear 'redis' do
+  action :install
+  version node['php_chef']['webserver']['redis_version']
 end
