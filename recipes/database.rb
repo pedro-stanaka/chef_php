@@ -11,7 +11,6 @@ directory "/etc/postgresql/#{node['postgresql']['version']}/main" do
   only_if { platform?('ubuntu') }
 end
 
-
 if platform?('debian') || (platform?('ubuntu') && node['platform_version'].to_f > 14.04)
   node['php_chef']['database']['packages'].each do |pkg|
     package 'Debian MariaDB Client Files' do
@@ -43,7 +42,7 @@ mysql_database node['php_chef']['database']['dbname'] do
     username: node['php_chef']['database']['username'],
     password: node['php_chef']['database']['password']
   )
-  only_if { (platform?('ubuntu') && node['platform_version'].to_f <= 14.04)  }
+  only_if { (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) }
 end
 
 mysql_database_user node['php_chef']['database']['app']['username'] do
@@ -56,9 +55,8 @@ mysql_database_user node['php_chef']['database']['app']['username'] do
   database_name node['php_chef']['database']['dbname']
   host node['php_chef']['database']['host']
   action [:create, :grant]
-  only_if { (platform?('ubuntu') && node['platform_version'].to_f <= 14.04)  }
+  only_if { (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) }
 end
-
 
 ## PostgreSQL
 

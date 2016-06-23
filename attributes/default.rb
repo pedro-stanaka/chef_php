@@ -77,7 +77,6 @@ default['postgresql']['pg_hba'] = [
 default['postgresql']['initdb_locale'] = 'en_US.UTF8'
 default['postgresql']['password']['postgres'] = 'postgres'
 
-
 if platform?('ubuntu') && node['platform_version'].to_f > 14.04
   # Ubuntu Xenial
   default['postgresql']['version'] = '9.5'
