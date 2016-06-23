@@ -1,4 +1,8 @@
+# Control variables
+# dev, deploy
+default['php_chef']['environment'] = 'dev'
 
+# Users and groups
 default['php_chef']['user'] = 'deploy'
 default['php_chef']['group'] = 'deploy'
 
@@ -59,6 +63,8 @@ default['php_chef']['database']['host'] = '127.0.0.1'
 default['php_chef']['database']['username'] = 'root'
 default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
 default['php_chef']['database']['dbname'] = 'phpchef'
+default['php_chef']['database']['app']['username'] = 'phpapp'
+default['php_chef']['database']['app']['password'] = 'appsecret'
 
 ## PostgreSQL
 default['postgresql']['pg_hba'] = [
@@ -71,8 +77,6 @@ default['postgresql']['pg_hba'] = [
 default['postgresql']['initdb_locale'] = 'en_US.UTF8'
 default['postgresql']['password']['postgres'] = 'postgres'
 
-default['php_chef']['database']['app']['username'] = 'phpapp'
-default['php_chef']['database']['app']['password'] = 'appsecret'
 
 if platform?('ubuntu') && node['platform_version'].to_f > 14.04
   # Ubuntu Xenial

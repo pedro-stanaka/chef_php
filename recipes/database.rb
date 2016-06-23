@@ -25,8 +25,11 @@ if platform?('debian') || (platform?('ubuntu') && node['platform_version'].to_f 
     mode 00777
   end
 
-  execute 'fix mysql socket auth' do
-    command "sudo mysql -uroot -p#{node['mariadb']['server_root_password']} < /tmp/mysql_bootstrap.sql"
+  execute 'create user and database' do
+    command <<-eos
+            sudo mysql -u#{node['php_chef']['database']['username']} \
+              -p#{node['mariadb']['server_root_password']} < /tmp/mysql_bootstrap.sql
+            eos
     action :run
   end
 end
