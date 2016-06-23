@@ -90,7 +90,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	         password: 'p4assch3fphp'
 	      },
         allow_root_pass_change: true,
-        forbid_remote_root: false,
         server_root_password: 'p4assch3fphp',
         server_debian_password: 'p4assch3fphp',
         server_repl_password: 'replpass'
