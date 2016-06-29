@@ -5,7 +5,7 @@ include_recipe 'mariadb::client'
 directory "/etc/postgresql/#{node['postgresql']['version']}/main" do
   owner 'nobody'
   group 'nogroup'
-  mode 00755
+  mode 0o0755
   recursive true
   action :create
   only_if { platform?('ubuntu') }
@@ -23,23 +23,26 @@ end
 # Include after installing client libraries
 include_recipe 'mysql2_chef_gem::mariadb'
 
+mysql_connection = {
+  host: node['php_chef']['database']['host'],
+  username: node['php_chef']['database']['username'],
+  password: (node['php_chef']['database']['password'] if (platform?('ubuntu')
+    && node['platform_version'].to_f <= 14.04)),
+  socket: '/var/run/mysqld/mysqld.sock'
+}.reject{ |k,v| v.nil? }
+
 mysql_database node['php_chef']['database']['dbname'] do
-  connection(
-    host: node['php_chef']['database']['host'],
-    username: node['php_chef']['database']['username'],
-    password:  (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) ?
-                  node['php_chef']['database']['password'] : nil,
-    socket: '/var/run/mysqld/mysqld.sock'
-  )
+  connection(mysql_connection)
 end
 
 mysql_database_user node['php_chef']['database']['app']['username'] do
-  connection(
+  connection({
     host: node['php_chef']['database']['host'],
     username: node['php_chef']['database']['username'],
-    password:  (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) ?
-                  node['php_chef']['database']['password'] : nil,
+    password: if (platform?('ubuntu') && node['platform_version'].to_f <= 14.04)
+      node['php_chef']['database']['password'] else nil,
     socket: '/var/run/mysqld/mysqld.sock'
+  }
   )
   password node['php_chef']['database']['app']['password']
   database_name node['php_chef']['database']['dbname']
