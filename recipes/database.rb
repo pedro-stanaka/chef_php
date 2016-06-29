@@ -18,19 +18,6 @@ if platform?('debian') || (platform?('ubuntu') && node['platform_version'].to_f 
       package_name pkg
     end
   end
-
-  template '/tmp/mysql_bootstrap.sql' do
-    source 'create_database_and_user.sql.erb'
-    mode 00777
-  end
-
-  execute 'create user and database' do
-    command <<-eos
-            sudo mysql -u#{node['php_chef']['database']['username']} \
-              -p#{node['mariadb']['server_root_password']} < /tmp/mysql_bootstrap.sql
-            eos
-    action :run
-  end
 end
 
 # Include after installing client libraries
@@ -40,22 +27,20 @@ mysql_database node['php_chef']['database']['dbname'] do
   connection(
     host: node['php_chef']['database']['host'],
     username: node['php_chef']['database']['username'],
-    password: node['php_chef']['database']['password']
+    socket: '/var/run/mysqld/mysqld.sock'
   )
-  only_if { (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) }
 end
 
 mysql_database_user node['php_chef']['database']['app']['username'] do
   connection(
     host: node['php_chef']['database']['host'],
     username: node['php_chef']['database']['username'],
-    password: node['php_chef']['database']['password']
+    socket: '/var/run/mysqld/mysqld.sock'
   )
   password node['php_chef']['database']['app']['password']
   database_name node['php_chef']['database']['dbname']
   host node['php_chef']['database']['host']
   action [:create, :grant]
-  only_if { (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) }
 end
 
 ## PostgreSQL
