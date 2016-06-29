@@ -27,6 +27,8 @@ mysql_database node['php_chef']['database']['dbname'] do
   connection(
     host: node['php_chef']['database']['host'],
     username: node['php_chef']['database']['username'],
+    password:  (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) ?
+                  node['php_chef']['database']['password'] : nil,
     socket: '/var/run/mysqld/mysqld.sock'
   )
 end
@@ -35,6 +37,8 @@ mysql_database_user node['php_chef']['database']['app']['username'] do
   connection(
     host: node['php_chef']['database']['host'],
     username: node['php_chef']['database']['username'],
+    password:  (platform?('ubuntu') && node['platform_version'].to_f <= 14.04) ?
+                  node['php_chef']['database']['password'] : nil,
     socket: '/var/run/mysqld/mysqld.sock'
   )
   password node['php_chef']['database']['app']['password']
