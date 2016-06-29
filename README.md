@@ -1,7 +1,6 @@
 # php_chef Cookbook
 [![Build Status](https://travis-ci.org/pedro-stanaka/php_chef.svg?branch=master)](https://travis-ci.org/pedro-stanaka/php_chef)
 
-
 This cookbook installs/configures the following packages:
 
 * PHP7
@@ -15,9 +14,17 @@ This cookbook installs/configures the following packages:
   * Bower
   * Yo
 
-## Supported Platforms
+## Quick start
 
-This cookbook should work in all debian-based distros.
+If you want to use this cookbok as entry point for a Vagrant box. Check out my box:
+[CakeOven](https://atlas.hashicorp.com/pedrostanaka/boxes/cake-oven).
+
+It is just as easy as running ```vagrant up```
+
+## Supported platforms
+
+This cookbook shoul work on Ubuntu (14.04+), Debian (7+) and CentOS (7.2+).
+But was tested against Ubuntu 14.04, Ubuntu 16.04 and Debian 8;
 
 ## Attributes
 
@@ -29,25 +36,45 @@ This cookbook should work in all debian-based distros.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['php_chef']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['php_chef']['appname']</tt></td>
+    <td>string</td>
+    <td>Default app name</td>
+    <td><tt>mypp</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['php_chef']['servername']</tt></td>
+    <td>string</td>
+    <td>Default hostname</td>
+    <td><tt>myapp.local</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['php_chef']['webserver']['php_fpm_url']</tt></td>
+    <td>string</td>
+    <td>Default URL used by NGINX to connect on PHP-FPM</td>
+    <td><tt>/var/run/php-fpm.sock</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['php_chef']['database']['dbname']</tt></td>
+    <td>string</td>
+    <td>Name of the database for the application</td>
+    <td><tt>phpchef</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['php_chef']['database']['app']['username']</tt></td>
+    <td>string</td>
+    <td>The user for the application</td>
+    <td><tt>phpapp</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['php_chef']['database']['app']['password']</tt></td>
+    <td>string</td>
+    <td>password of the user</td>
+    <td><tt>appsecret</tt></td>
   </tr>
 </table>
 
-## Vagrant Plugins
-
-In order to use this repository one must install Chef plugins in Vagrant.
-To do this, run the following commands:
-
-```bash
-vagrant plugin install vagrant-berkshelf
-vagrant plugin install vagrant-omnibus
-```
 
 ## Usage
-
 
 ### php_chef::default
 
