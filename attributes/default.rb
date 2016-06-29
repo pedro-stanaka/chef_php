@@ -10,7 +10,14 @@ default['php_chef']['group'] = 'deploy'
 default['php_chef']['appname'] = 'myapp'
 default['php_chef']['servername'] = 'myapp.local'
 default['php_chef']['document_root'] = "/var/www/#{node['php_chef']['appname']}"
-default['php_chef']['webserver']['php_fpm_url'] = '/var/run/php5-fpm.sock'
+default['php_chef']['webserver']['php_fpm_url'] = '/var/run/php-fpm.sock'
+
+default['php_chef']['database']['host'] = 'localhost'
+default['php_chef']['database']['username'] = 'root'
+default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
+default['php_chef']['database']['dbname'] = 'phpchef'
+default['php_chef']['database']['app']['username'] = 'phpapp'
+default['php_chef']['database']['app']['password'] = 'appsecret'
 
 php_packages = []
 
@@ -58,13 +65,6 @@ when 'debian'
   default['mariadb']['apt_repository']['base_url'] = 'mirrors.digitalocean.com/mariadb/repo/'
   default['mariadb']['install']['prefer_os_package'] = false
 end
-
-default['php_chef']['database']['host'] = 'localhost'
-default['php_chef']['database']['username'] = 'root'
-default['php_chef']['database']['password'] = node['mariadb']['server_root_password']
-default['php_chef']['database']['dbname'] = 'phpchef'
-default['php_chef']['database']['app']['username'] = 'phpapp'
-default['php_chef']['database']['app']['password'] = 'appsecret'
 
 ## PostgreSQL
 default['postgresql']['pg_hba'] = [

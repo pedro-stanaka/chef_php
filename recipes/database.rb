@@ -24,26 +24,19 @@ end
 include_recipe 'mysql2_chef_gem::mariadb'
 
 mysql_connection = {
-  host: node['php_chef']['database']['host'],
   username: node['php_chef']['database']['username'],
-  password: (node['php_chef']['database']['password'] if (platform?('ubuntu')
-    && node['platform_version'].to_f <= 14.04)),
+  host: node['php_chef']['database']['host'],
+  password: (node['php_chef']['database']['password'] if platform?('ubuntu') &&
+      node['platform_version'].to_f <= 14.04),
   socket: '/var/run/mysqld/mysqld.sock'
-}.reject{ |k,v| v.nil? }
+}.reject { |_k, v| v.nil? }
 
 mysql_database node['php_chef']['database']['dbname'] do
   connection(mysql_connection)
 end
 
 mysql_database_user node['php_chef']['database']['app']['username'] do
-  connection({
-    host: node['php_chef']['database']['host'],
-    username: node['php_chef']['database']['username'],
-    password: if (platform?('ubuntu') && node['platform_version'].to_f <= 14.04)
-      node['php_chef']['database']['password'] else nil,
-    socket: '/var/run/mysqld/mysqld.sock'
-  }
-  )
+  connection(mysql_connection)
   password node['php_chef']['database']['app']['password']
   database_name node['php_chef']['database']['dbname']
   host node['php_chef']['database']['host']
